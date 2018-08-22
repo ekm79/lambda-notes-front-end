@@ -48,7 +48,7 @@ export const TOGGLE_UPDATE = 'TOGGLE_UPDATE';
 export function getNotes () {
     return(dispatch) =>{
     dispatch({type: GETTING_NOTES});
-    axios.get('http://localhost:5000/api/post')
+    axios.get('https://lambda-notes-back.herokuapp.com/api/post')
       .then(({data}) => {
           dispatch({type: RECEIVED_NOTES, payload: data});
       })
@@ -62,7 +62,7 @@ export function getNotes () {
 export function getSingleNote (id) {
     return(dispatch) =>{
     dispatch({type: GETTING_SINGLE_NOTE});
-    axios.get(`http://localhost:5000/api/post/${id}`)
+    axios.get(`https://lambda-notes-back.herokuapp.com/api/post/${id}`)
       .then(({data}) => {
           console.log(data)
           dispatch({type: RECEIVED_SINGLE_NOTE, payload: data});
@@ -78,7 +78,7 @@ export function getSingleNote (id) {
 export function createNote (newNote) {
     return(dispatch) =>{
     dispatch({type: CREATING_NOTE});
-    axios.post('http://localhost:5000/api/post', newNote)
+    axios.post('https://lambda-notes-back.herokuapp.com/api/post', newNote)
       .then(({data}) => {
           console.log(data)
           dispatch({type: NOTE_CREATED, payload: data});
@@ -93,7 +93,7 @@ export function createNote (newNote) {
 export function updateNote (id, note) {
     return(dispatch) =>{
     dispatch({type: UPDATING_NOTE});
-    axios.put(`http://localhost:5000/api/post/${id}`, note)
+    axios.put(`https://lambda-notes-back.herokuapp.com/api/post/${id}`, note)
       .then(({data}) => {
           console.log(data)
           dispatch({type: NOTE_UPDATED, payload: data});
@@ -108,7 +108,7 @@ export function updateNote (id, note) {
 export function deleteNote (id) {
     return(dispatch) =>{
     dispatch({type: DELETING_NOTE});
-    axios.delete(`http://localhost:5000/api/post/${id}`)
+    axios.delete(`https://lambda-notes-back.herokuapp.com/api/post/${id}`)
       .then(({data}) => {
           console.log(data)
           dispatch({type: NOTE_DELETED, payload: data});
@@ -123,7 +123,7 @@ export function deleteNote (id) {
 export function searchNotes (searchTerm) {
     return (dispatch) => {
         dispatch({type: SEARCHING_NOTES});
-        axios.get(`http://localhost:5000/api/post`)
+        axios.get(`https://lambda-notes-back.herokuapp.com/api/post`)
         .then(({data}) => {
             console.log(data);
             let filtered = data.filter(note => {
@@ -142,7 +142,7 @@ export function searchNotes (searchTerm) {
 export function createUser (user) {
     return(dispatch) =>{
     dispatch({type: CREATING_USER});
-    axios.post('http://localhost:5000/api/user/register', user)
+    axios.post('https://lambda-notes-back.herokuapp.com/api/user/register', user)
       .then(({data}) => {
           console.log(data)
           localStorage.setItem("token", JSON.stringify(data));
@@ -159,7 +159,7 @@ export function loginUser (user) {
     return(dispatch) =>{
     dispatch({type: LOGGING_IN});
     console.log('logging in');
-    axios.post('http://localhost:5000/api/user/login', user)
+    axios.post('https://lambda-notes-back.herokuapp.com/api/user/login', user)
       .then(({data}) => {
           console.log(data)
           localStorage.setItem("token", JSON.stringify(data));
@@ -175,7 +175,7 @@ export function loginUser (user) {
 export function addTags (tag) {
     return(dispatch) => {
         dispatch({type: ADDING_TAGS});
-        axios.post('http://localhost:5000/api/tags', tag)
+        axios.post('https://lambda-notes-back.herokuapp.com/api/tags', tag)
         .then(({data}) => {
             console.log(data)
             dispatch({type: TAGS_ADDED, payload: data})
