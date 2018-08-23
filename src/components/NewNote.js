@@ -4,7 +4,6 @@ import Styled from 'styled-components';
 import { createNote, toggleUpdate } from './../actions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import ListForm from './ListForm';
 import AddTag from './AddTag';
 
 
@@ -45,14 +44,11 @@ class NewNote extends React.Component {
             notes: [],
             showForm: false,
             showTagForm: false,
-            listItem: '',
-            checkList: [],
             tag: '',
             newNote: {
                 title: "",
                 textBody: "",
-              //  checkList: [],
-                //tags: [],
+                tags: [],
             }   
         }
     }
@@ -74,18 +70,8 @@ class NewNote extends React.Component {
       console.log()
     }
 
-    toggleForm = () => {
-        this.setState({showForm: !this.state.showForm})
-    }
-
     toggleTag = () => {
         this.setState({showTagForm: !this.state.showTagForm})
-    }
-
-    addToNote = () => {
-        const list = this.state.checkList.push(this.state.listItem)
-        this.setState(state => ({checkList: [...this.state.newNote, list]}));
-        console.log(this.state.newNote);
     }
 
     addItem = (newNote) => {
@@ -93,6 +79,9 @@ class NewNote extends React.Component {
          this.setState(state => ({tags: [...this.state.newNote, newTags]}))
      }
 
+     componentDidMount() {
+         
+     }
 
 
     render() {
@@ -118,43 +107,12 @@ class NewNote extends React.Component {
                         onChange={this.handleChange.bind(this, 'newNote')}
                         />
                         <div>
-                        <button onClick={this.toggleForm}>Add checklist</button>
                         <button onClick={this.toggleTag}>Add tag</button>
                         </div>
-
-                        {this.state.showForm ? 
-                        <div>
-                        <ul>{console.log(this.state.checkList)}
-                            {this.state.checkList.map(item => {
-                                return <li key={item}>{item}</li>
-                            })}
-                            </ul>
-                               
-                                <input 
-                                    type='text'
-                                    name='listItem'
-                                    placeholder='Add to list'
-                                    value={this.state.listItem}
-                                    onChange={this.handleItem}
-                                />
-                                <button onClick={this.addToNote}>Add to list</button>
-                               
-                            </div>
-                        : null}
-
-
-
-
                         
                         {this.state.showTagForm ? 
                             <div >
-                                <input 
-                                    type='text'
-                                    name='tag'
-                                    placeholder='Tag'
-                                    onChange={this.handleItem}
-                                />
-                                <button onClick={this.addTag}>Add</button>
+                                <AddTag/>
                             </div>
                         : null}
 
@@ -179,3 +137,11 @@ const mapStateToProps = state => {
     toggleUpdate: toggleUpdate,
   }
   export default connect( mapStateToProps, mapActionsToProps)(NewNote);
+
+  /*<input 
+                                    type='text'
+                                    name='tag'
+                                    placeholder='Tag'
+                                    onChange={this.handleItem}
+                                />
+                                <button onClick={this.addTag}>Add</button>*/

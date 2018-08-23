@@ -12,6 +12,7 @@ import {
 const initialState = {
     loggingIn: false,
     loggedIn: false,
+    loggingOut: false,
     creatingUser: false,
     userCreated: false,
     error: null
@@ -26,15 +27,15 @@ export const userReducers = (state=initialState, {type, payload}) => {
         case REGISTER_FAILED:
             return {...state, creatingUser: false, loggingIn: false, error: payload}
         case LOGGING_IN:
-            return {...state, loggingIn: true}
+            return Object.assign({}, state, {loggingIn: true, })
         case LOGGED_IN:
-            return {...state, loggingIn: false, loggedIn: true}
+            return Object.assign({}, state, {loggingIn: false, loggedIn: true})
         case LOGIN_FAILED:
             return {...state, loggingIn: false, error: payload}
         case LOGGING_OUT:
             return {...state, loggingOut: true}
         case LOGGED_OUT:
-            return {...state, loggingOut: false, loggedIn: false}
+            return Object.assign({}, state, {loggingOut: false, loggedIn: false})
         default:
         return state;
     }

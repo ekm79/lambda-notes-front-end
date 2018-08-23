@@ -9,7 +9,6 @@ class AddTag extends React.Component {
             tag: '',
             tags: []
         }
-
     }
 
     handleTag = (event) => {
@@ -24,6 +23,19 @@ class AddTag extends React.Component {
         this.setState({tag:'', tags: tags})
         console.log(tags);
     }
+
+
+    removeTag = () => {
+        const tag = this.props.match.params.id;
+        const tags = this.state.tags;
+        const index = tags.findIndex(() => {
+            return tag;
+        })
+        const removed = tags.splice(index, 1)
+        this.setState({tags: tags})
+    }
+
+
     render() {
         return(
             <div>

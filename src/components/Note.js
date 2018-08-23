@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DeleteModal from './Delete';
 import { toggleModal, getSingleNote, updateNote } from './../actions';
 import { connect } from 'react-redux';
-import ListForm from './ListForm';
+
 
 const NoteContainer = Styled.div`
 display: block;
@@ -94,31 +94,7 @@ class Note extends React.Component {
             <Delete onClick={this.openModal}>delete</Delete>
             </Edit>
         <Heading>{this.props.note.title}</Heading>
-        <Body>{this.props.note.textBody}</Body>
-      {this.props.note.checkList ? 
-        <ListContainer>
-            <ListHeading>Checklist</ListHeading>
-            <ul>
-            {this.state.checkList.map(item => {
-                return <div>
-                    <ListItem>
-                    <input 
-                        type='checkbox' 
-                        id='checkbox'  
-                        onClick={()=>this.toggleFlag()} 
-                        style={{marginRight: '15px'}}
-                        />
-                        {item}
-                        </ListItem>
-                        </div>  
-                    })}
-                  
-                    </ul>
-                <ListForm  addItem={this.addListItem}/>
-            </ListContainer> : null}
-
-
-       
+        <Body>{this.props.note.textBody}</Body>   
         </NoteContainer>
        
         </Container>

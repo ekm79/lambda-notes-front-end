@@ -3,6 +3,7 @@ import { loginUser } from './../../actions';
 import { connect } from 'react-redux';
 import {Button} from './../../styles/styles';
 import Styled from 'styled-components';
+import {withRouter} from 'react-router-dom';
 
 
 const LoginContainer = Styled.form`
@@ -36,7 +37,7 @@ handleSubmit = event => {
     event.preventDefault();
     const user = this.state;
     this.props.loginUser(user);
-    console.log(this.state)
+        this.props.history.push("/notes")
     
 }
 
@@ -74,4 +75,6 @@ const mapStateToProps = state => {
   const mapActionsToProps = {
     loginUser: loginUser,
   }
+
+  Login = withRouter(Login);
   export default connect( mapStateToProps, mapActionsToProps)(Login);

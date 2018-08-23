@@ -186,10 +186,12 @@ export function addTags (tag) {
     }
 }
 
-export function logoutUser () {
+export function logoutUser (history) {
     return(dispatch) => {
         dispatch({type: LOGGING_OUT});
-        localStorage.removeItem('token');  
+        localStorage.removeItem('token'); 
+        dispatch({type: LOGGED_OUT});
+        history.push('/');
     }
 }
 
